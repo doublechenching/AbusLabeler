@@ -53,7 +53,7 @@ bool MedicalVolume::LoadDicomFile(const char* filePath)
 		// get spacing
 		m_pDataset->findAndGetOFString(DCM_SpacingBetweenSlices, strTmp);
 		m_slice_s =  atof(strTmp.c_str());
-
+		// get gender
 		m_pDataset->findAndGetOFString(DCM_PatientSex, strTmp);
 		if (strcmp(strTmp.c_str(), "F"))
 		{
@@ -63,20 +63,28 @@ bool MedicalVolume::LoadDicomFile(const char* filePath)
 		{
 			m_sex = TRUE;
 		}
+		// get age
 		m_pDataset->findAndGetOFString(DCM_PatientAge, strTmp);
 		m_age = atoi(strTmp.c_str());
-
+		// get view name
 		m_pDataset->findAndGetOFString(DCM_ViewName, strTmp);
 		m_viewName = CString(strTmp.c_str());
 
 		m_pDataset->findAndGetOFString(DCM_ViewName, strTmp);
 		m_file_size = atoi(strTmp.c_str());
-
+		// get spacing
 		m_pDataset->findAndGetOFString(DCM_PixelSpacing, strTmp, 0);
 		m_height_s = atof(strTmp.c_str());
-
 		m_pDataset->findAndGetOFString(DCM_PixelSpacing, strTmp, 1);
 		m_width_s = atof(strTmp.c_str());
+
+		// get nipple position
+		m_pDataset->findAndGetOFString(DcmTagKey(0x0021, 0x1020), strTmp, 0);
+		m_nipple_pos_x = atof(strTmp.c_str());
+		m_pDataset->findAndGetOFString(DcmTagKey(0x0021, 0x1020), strTmp, 1);
+		m_nipple_pos_y = atof(strTmp.c_str());
+		m_pDataset->findAndGetOFString(DcmTagKey(0x0021, 0x1020), strTmp, 2);
+		m_nipple_pos_z = atof(strTmp.c_str());
 
 		// get pixel data
 		const Uint8 * pUint8 = NULL;
@@ -86,6 +94,7 @@ bool MedicalVolume::LoadDicomFile(const char* filePath)
 			delete[] m_pDSCVoxelData;
 			m_pDSCVoxelData = NULL;
 		}
+
 		m_pVoxelData = new Uint8[m_heigth*m_width*m_depth];
 		unsigned long count = 0;
 		m_pDataset->findAndGetUint8Array(DCM_PixelData, pUint8, &count);
@@ -176,6 +185,13 @@ void MedicalVolume::GetPixelSpacing(double& s1, double& s2)
 {
 	s1 = m_height_s;
 	s2 = m_width_s;
+}
+
+void MedicalVolume::GetNipplePos(double &x, double& y, double& z)
+{
+	x = m_nipple_pos_x;
+	y = m_nipple_pos_y;
+	z = m_nipple_pos_z;
 }
 
 void MedicalVolume::GetViewImage(Uint8* imageBuffer, int viewNum, int x, int y, int z)

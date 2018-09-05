@@ -24,6 +24,7 @@ public:
 	CString GetViewName();
 	int GetFileSize();
 	void GetPixelSpacing(double& s1, double& s2);
+	void GetNipplePos(double &x, double& y, double& z);
 	void GetViewImage(Uint8* imageBuffer, int viewNum, int x, int y, int z);
 	void GetViewLabel(Uint8* imageBuffer, int viewNum, int x, int y, int z);
 	int GetHeight();
@@ -55,6 +56,9 @@ private:
 	CString m_viewName;
 	int m_file_size;
 	int m_dsc_borderpadding_len;
+	double m_nipple_pos_x;
+	double m_nipple_pos_y;
+	double m_nipple_pos_z;
 	Uint8* m_label_buffer;
 public:
 	int m_dsc_image_height;
