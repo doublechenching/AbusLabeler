@@ -107,6 +107,18 @@ bool MedicalVolume::LoadDicomFile(const char* filePath)
 	}
 }
 
+void MedicalVolume::LoadSegmentation(unsigned char* p_dsc_label)
+{
+	if (p_dsc_label == NULL)
+	{
+		return;
+	}
+	else
+	{
+		memcpy(m_label_buffer, p_dsc_label, m_dsc_image_height*m_dsc_image_width*m_depth);
+	}
+}
+
 void MedicalVolume::GetAllInfo(DcmDataset* m_pDataset, vector<string> & pStrKeys, vector<string> & pStrValues)
 {
 	m_pDataset->print(std::cout);

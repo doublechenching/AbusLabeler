@@ -14,6 +14,7 @@ public:
 	MedicalVolume();
 	MedicalVolume(const char* filePath);
 	bool LoadDicomFile(const char* filePath);
+	void LoadSegmentation(unsigned char* p_dsc_label);
 	void GetAllInfo(DcmDataset* m_pDataset, vector<string> & pStrKeys, vector<string> & pStrValues);
 	CString GetPatientName();
 	CString GetPatientID();
