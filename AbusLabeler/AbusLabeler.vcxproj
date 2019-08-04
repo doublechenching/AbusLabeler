@@ -54,7 +54,7 @@
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -120,7 +120,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <DelayLoadDLLs>opencv_ffmpeg342_64.dll;opencv_world342d.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>opencv_core343d.dll;opencv_imgproc343d.dll;vtkCommonColor-8.2.dll;vtkDICOMParser-8.2.dll;vtkInteractionStyle-8.2.dll;vtkCommonComputationalGeometry-8.2.dll;vtkFiltersCore-8.2.dll;vtkIOImage-8.2.dll;vtkCommonCore-8.2.dll;vtkFiltersExtraction-8.2.dll;vtkmetaio-8.2.dll;vtkCommonDataModel-8.2.dll;vtkFiltersGeneral-8.2.dll;vtkRenderingCore-8.2.dll;vtkCommonExecutionModel-8.2.dll;vtkFiltersGeometry-8.2.dll;vtkRenderingFreeType-8.2.dll;vtkCommonMath-8.2.dl;lvtkFiltersSources-8.2.dll;vtkRenderingOpenGL2-8.2.dll;vtkCommonMisc-8.2.dll;vtkFiltersStatistics-8.2.dll;vtksys-8.2.dll;vtkCommonSystem-8.2.dll;vtkImagingCore-8.2.dll;vtkCommonTransforms-8.2.dll;vtkImagingFourier-8.2.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <AdditionalDependencies>iphlpapi.lib;ws2_32.lib;netapi32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -168,11 +169,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Iphlpapi.lib;ws2_32.lib;wsock32.lib;netapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

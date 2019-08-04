@@ -34,6 +34,7 @@ void ABUSAlg::DSC2D(cv::Mat &dsc_image, cv::Mat org_image, int method)
 			mapY.at<float>(j, i) = center_y - radius * cos(angle);
 		}
 	}
+
 	cv::remap(org_image, dsc_image, mapX, mapY, method, cv::BORDER_CONSTANT, cv::Scalar(0));
 	
 }
